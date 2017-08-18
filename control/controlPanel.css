@@ -1,0 +1,15 @@
+.schoolList{
+    display: flex;
+    flex-wrap: wrap
+}
+
+.schoolList .school{
+    border: solid black 1px;
+    border-radius: 5px;
+    background: linen;
+    flex: 0 0 auto;
+    width: 15em;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    padding: 0.25em;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "expelliarmus_points",
+  "version": "1.0.0",
+  "description": "small app to count points in hourglass for the expelliarmus tea party event",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul-Yves & Alienosaurus",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.6.11"
+  }
+}

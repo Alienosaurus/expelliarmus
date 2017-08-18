@@ -1,0 +1,22 @@
+.schoolList{
+    display: flex;
+    flex-wrap: wrap
+}
+
+.schoolList .school{
+    border: solid black 1px;
+    border-radius: 5px;
+    background: linen;
+    flex: 1 1 auto;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    padding: 0.25em;
+}
+
+.school h2, .school .hourglass{
+    text-align: center;
+}
+.school canvas{
+    width: 120px;
+    height: 200px;
+}
