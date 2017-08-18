@@ -65,7 +65,9 @@ hourglassWindow.loadURL(url.format({
     protocol: 'file:',
     slashes: true
   }))
-hourglassWindow.webContents.openDevTools()
+if(remote.getCurrentWindow().devMode){
+    hourglassWindow.webContents.openDevTools()
+}
 hourglassWindow.webContents.on('did-finish-load', () => {
     hourglassWindow.webContents.send('message', {type: "init", content: schools});
 });

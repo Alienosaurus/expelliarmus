@@ -4,7 +4,7 @@
   "description": "small app to count points in hourglass for the expelliarmus tea party event",
   "main": "main.js",
   "scripts": {
-    "start": "./node_modules/.bin/electron .",
+    "start": "./node_modules/.bin/electron . devMode",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Paul-Yves & Alienosaurus",

@@ -1,15 +1,18 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const process = require('process')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let controlWindow
 
+const devMode = process.argv.indexOf("devMode") >= 0;
+
 function createWindow () {
   // Create the browser window.
   controlWindow = new BrowserWindow({width: 900, height: 600})
-
+  controlWindow.devMode = devMode;
   // and load the index.html of the app.
   controlWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'control/index.html'),
@@ -17,8 +20,10 @@ function createWindow () {
     slashes: true
   }))
 
-  // Open the DevTools.
-  controlWindow.webContents.openDevTools()
+  if(devMode){
+    // Open the DevTools.
+    controlWindow.webContents.openDevTools()
+  }
 
   // Emitted when the window is closed.
   controlWindow.on('closed', () => {
