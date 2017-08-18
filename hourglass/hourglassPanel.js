@@ -22,11 +22,20 @@ function fillUpper(canvas, ctx, points){
     ctx.fill();
 }
 
-function fillCanvas(canvas, points, color){
+function fillCanvas(canvas, points, color, secondColor){
     var ctx = canvas.getContext('2d');
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = color;
+    
+    if(secondColor){
+        var gradient = ctx.createLinearGradient(0, 0, 3*canvas.width/4, 8*canvas.height/10);
+        gradient.addColorStop(0, color);
+        gradient.addColorStop(1, secondColor);
+        ctx.fillStyle = gradient;
+    } else {
+        ctx.fillStyle = color;
+    }
+
     fillUpper(canvas, ctx, points);
     ctx.beginPath();
     const relativeValue = (points / pointsLimit) * (canvas.height / 2)
@@ -52,27 +61,27 @@ Vue.component('school-hourglass', {
             console.log("changing school ", newVal.points, oldVal.points);
             //here do the repaint of hourglass
             const canvas = this.$refs.hourglassCanvas;
-            const color = this.school.color;
+            const {color, secondColor} = this.school;
             if(newVal.points != oldVal.points){
                 let inc = newVal.points > oldVal.points ? 1 : -1;
                 let ptsTmp = oldVal.points;
                 let augmenter = setInterval(function(){ 
                     if(ptsTmp != newVal.points){
                         ptsTmp += inc;
-                        fillCanvas(canvas, ptsTmp, color);
+                        fillCanvas(canvas, ptsTmp, color, secondColor);
                     } else {
                         clearInterval(augmenter);
                     }
                 }, 30);
-                fillCanvas(this.$refs.hourglassCanvas, newVal.points, color);
+                fillCanvas(this.$refs.hourglassCanvas, newVal.points, color, secondColor);
             } else {
                 //still repaint once in case max size changed
-                fillCanvas(canvas, newVal.points, color);
+                fillCanvas(canvas, newVal.points, color, secondColor);
             }
         }
     },
     mounted () {
-        fillCanvas(this.$refs.hourglassCanvas, this.school.points, this.school.color);
+        fillCanvas(this.$refs.hourglassCanvas, this.school.points, this.school.color, this.school.secondColor);
     },
     template: '<div class="school"><h2 v-bind:style="{ color: school.color}">{{school.name}}</h2>'+
         '<div class="hourglass"><canvas ref="hourglassCanvas"></canvas></canvs></div>'+

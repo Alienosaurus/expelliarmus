@@ -8,22 +8,22 @@ let hourglassWindow;
 
 const schools = [
     {name: "Beauxbatons",
-    color: "LightSkyBlue",
+    color: "#6699FF", secondColor: "#003399",
     points: 0, toAdd: 0},
     {name: "Durmstrang",
-    color: "#132b16",
+    color: "#1D2510", secondColor: "#690001",
     points: 0, toAdd: 0},
     {name: "Gryffondor",
-    color: "red",
+    color: "red", secondColor: "goldenrod",
     points: 0, toAdd: 0},
     {name: "Poufsouffle",
-    color: "goldenrod",
+    color: "#D8AC28", secondColor: "#141211",
     points: 0, toAdd: 0},
     {name: "Serdaigle",
-    color: "MidnightBlue",
+    color: "midnightblue", secondColor: "#CD7F32",
     points: 0, toAdd: 0},
     {name: "Serpentard",
-    color: "Green",
+    color: "#229F45", secondColor: "#666967",
     points: 0, toAdd: 0},
 ]
 
