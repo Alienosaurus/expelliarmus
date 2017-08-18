@@ -1,4 +1,5 @@
-#An electron application to count tournament points for the Expelliarmus tea party
+An electron application to count tournament points for the Expelliarmus tea party
+=================================================================================
 
 This is the source code for an electron application. The packaging into an actual app is done out
 of the versionned files, in the app_distrib folder.
