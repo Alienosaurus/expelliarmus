@@ -11,12 +11,30 @@
     margin-left: 1em;
     margin-bottom: 1em;
     padding: 0.25em;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .school h2, .school .hourglass{
     text-align: center;
 }
+.school .hourglass{
+    margin-bottom: 30px;
+    position: relative;
+    height: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 120px;
+}
 .school canvas{
     width: 120px;
     height: 200px;
+}
+
+.school .hourglass img{    
+    width: 157px;
+    height: 260px;
+    position: absolute;
+    left: -15px;
+    top: -11px;
 }

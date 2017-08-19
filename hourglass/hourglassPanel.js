@@ -28,7 +28,7 @@ function fillCanvas(canvas, points, color, secondColor){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     if(secondColor){
-        var gradient = ctx.createLinearGradient(0, 0, 3*canvas.width/4, 8*canvas.height/10);
+        var gradient = ctx.createLinearGradient(4*canvas.width/10, 0, 7*canvas.width/10, 8*canvas.height/10);
         gradient.addColorStop(0, color);
         gradient.addColorStop(1, secondColor);
         ctx.fillStyle = gradient;
@@ -48,7 +48,7 @@ function fillCanvas(canvas, points, color, secondColor){
     ctx.lineTo(canvas.width - hourX, canvas.height - relativeValue);
     ctx.lineTo(canvas.width, canvas.height);
     ctx.fill();
-    drawHourglass(canvas, ctx);
+    //drawHourglass(canvas, ctx); //no longer need to draw hourglass since we have images
 }
 
 Vue.component('school-hourglass', {
@@ -58,7 +58,6 @@ Vue.component('school-hourglass', {
     },
     watch: {
         school: function(newVal, oldVal){
-            console.log("changing school ", newVal.points, oldVal.points);
             //here do the repaint of hourglass
             const canvas = this.$refs.hourglassCanvas;
             const {color, secondColor} = this.school;
@@ -84,7 +83,10 @@ Vue.component('school-hourglass', {
         fillCanvas(this.$refs.hourglassCanvas, this.school.points, this.school.color, this.school.secondColor);
     },
     template: '<div class="school"><h2 v-bind:style="{ color: school.color}">{{school.name}}</h2>'+
-        '<div class="hourglass"><canvas ref="hourglassCanvas"></canvas></canvs></div>'+
+        '<div class="hourglass">'+
+            '<canvas ref="hourglassCanvas"></canvas>'+
+            '<img v-bind:src="school.img"/>'+
+        '</div>'+
     '</div>'
 })
 Vue.component('hourglass-panel', {
