@@ -1,9 +1,10 @@
 const {remote} = require('electron')
 const path = require('path')
 const url = require('url')
+const fs = require('fs');
 
 const BrowserWindow = remote.BrowserWindow;
-
+const BACKUPFILE = "backup.txt"
 let hourglassWindow;
 
 const schools = [
@@ -42,6 +43,12 @@ Vue.component('school-controller', {
             if(hourglassWindow != null){
                 hourglassWindow.webContents.send('message', {type: "update", content: schools});
             }
+            let pointsBackup = schools.map(function(school){return {"name": school.name, "points": school.points}});
+            fs.writeFile(BACKUPFILE, JSON.stringify(pointsBackup), function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+            }); 
         }
     },
     template: '<div class="school"><h2 v-bind:style="{ color: school.color}">{{school.name}}</h2>'+
@@ -64,6 +71,27 @@ const application = new Vue({
     schools: schools
   }
 });
+
+function loadBackup(backupData){
+    application.schools.forEach(function(school){
+        backupData.forEach(function(backedSchool){
+            if(school.name == backedSchool.name){
+                school.points = backedSchool.points;
+            }
+        });
+    });
+}
+
+if (fs.existsSync(BACKUPFILE)) {
+    //if we have backup data, maybe load them
+    if (confirm('Charger les données précédentes ?')) {
+        let text = fs.readFileSync(BACKUPFILE,'utf8');
+        let backupData = JSON.parse(text);
+        loadBackup(backupData);
+    } else {
+        // Do nothing!
+    }
+}
 
 hourglassWindow = new BrowserWindow({width: 900, height: 600});
 hourglassWindow.loadURL(url.format({

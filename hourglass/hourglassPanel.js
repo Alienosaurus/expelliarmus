@@ -96,7 +96,7 @@ Vue.component('hourglass-panel', {
 })
 
 ipc.on('message', (event, message) => {
-    console.log(message); // logs out "Hello second window!"
+    console.log(message);
     if(message.type == "init"){
         application = new Vue({
             el: '#app',
