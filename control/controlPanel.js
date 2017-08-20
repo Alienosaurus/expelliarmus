@@ -25,7 +25,7 @@ const schools = [
     img: "../images/poufsouffle.png",
     points: 0, toAdd: 0},
     {name: "Serdaigle",
-    color: "midnightblue", secondColor: "#CD7F32",
+    color: "midnightblue", secondColor: "#003399",
     img: "../images/serdaigle.png",
     points: 0, toAdd: 0},
     {name: "Serpentard",

@@ -106,7 +106,7 @@ ipc.on('message', (event, message) => {
         });
     } else if (message.type == "update") {
         message.content.forEach(function(school){
-            if(school.points >= pointsLimit){
+            if(school.points > pointsLimit){
                 pointsLimit = BASE_LIMIT * (1 + Math.floor(school.points / BASE_LIMIT));
             }
         })
