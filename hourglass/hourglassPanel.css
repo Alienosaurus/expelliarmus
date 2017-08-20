@@ -2,11 +2,13 @@
     display: flex;
     flex-wrap: wrap
 }
-
+body{
+    background-color: #afafce;
+}
 .schoolList .school{
-    border: solid black 1px;
+    /*border: solid black 1px;
     border-radius: 5px;
-    background: #afafce;
+    background: #afafce;*/
     flex: 1 1 auto;
     margin-left: 1em;
     margin-bottom: 1em;

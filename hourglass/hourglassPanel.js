@@ -82,7 +82,7 @@ Vue.component('school-hourglass', {
     mounted () {
         fillCanvas(this.$refs.hourglassCanvas, this.school.points, this.school.color, this.school.secondColor);
     },
-    template: '<div class="school"><h2 v-bind:style="{ color: school.color}">{{school.name}}</h2>'+
+    template: '<div class="school">'+
         '<div class="hourglass">'+
             '<canvas ref="hourglassCanvas"></canvas>'+
             '<img v-bind:src="school.img"/>'+
@@ -106,7 +106,7 @@ ipc.on('message', (event, message) => {
         });
     } else if (message.type == "update") {
         message.content.forEach(function(school){
-            if(school.points >= BASE_LIMIT){
+            if(school.points >= pointsLimit){
                 pointsLimit = BASE_LIMIT * (1 + Math.floor(school.points / BASE_LIMIT));
             }
         })
