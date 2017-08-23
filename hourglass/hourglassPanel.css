@@ -15,7 +15,7 @@ body{
     padding: 0.25em;
     padding-left: 25px;
     padding-right: 25px;
-    width: 25%;
+    min-width: 25%;
 }
 
 .school h2, .school .hourglass{
@@ -38,6 +38,6 @@ body{
     width: 145%;
     height: 130%;
     position: absolute;
-    left: -19.5%;
+    left: -19.0%;
     top: -6%;
 }

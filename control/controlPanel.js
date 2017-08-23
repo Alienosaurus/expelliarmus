@@ -4,7 +4,7 @@ const url = require('url')
 const fs = require('fs');
 
 const BrowserWindow = remote.BrowserWindow;
-const BACKUPFILE = "backup.txt"
+const BACKUPFILE = "backup.txt";
 let hourglassWindow;
 
 const schools = [
@@ -32,7 +32,14 @@ const schools = [
     color: "#229F45", secondColor: "#666967",
     img: "../images/serpentard.png",
     points: 0, toAdd: 0},
-]
+];
+
+const dimensions = {
+    width: 160,
+    height: 280,
+
+}
+schools.forEach((school) => school.dimensions = dimensions);
 
 Vue.component('school-controller', {
     props: ["school"],
@@ -58,17 +65,42 @@ Vue.component('school-controller', {
             '<button  v-on:click="addPoints" >Add points</button>'+
         '</div>'+
     '</div>'
-})
+});
+
+Vue.component('dimension-control', {
+    props: ["dimensions"],
+    methods: {
+        resize: function(){
+            this.dimensions.width = Number(this.dimensions.width);
+            this.dimensions.height = Number(this.dimensions.height);
+            if(hourglassWindow != null){
+                hourglassWindow.webContents.send('message', {type: "update", content: schools});
+            }
+        }
+    },
+    template: '<div class="dimensions">'+
+        '<h1>Redimensionnement</h1>'+
+        '<label>Width : <input v-model="dimensions.width" type="number" step="10" /></label>'+
+        '<label>Height : <input v-model="dimensions.height" type="number" step="10" /></label>'+
+        '<button  v-on:click="resize" >Resize</button>'+
+    '</div>'
+
+});
+
 Vue.component('control-panel', {
-  props: ["schools"],
-  template: '<div><div class="schoolList"><school-controller v-for="school in schools"' +
-      'v-bind:school="school" v-bind:key="school.name" /></div></div>'
-})
+  props: ["schools", "dimensions"],
+  template: '<div>'+
+        '<div class="schoolList"><school-controller v-for="school in schools"' +
+        'v-bind:school="school" v-bind:key="school.name" /></div>'+
+        '<dimension-control v-bind:dimensions="dimensions"/>'+
+    '</div>'
+});
 
 const application = new Vue({
   el: '#app',
   data: {
-    schools: schools
+    schools: schools,
+    dimensions: dimensions
   }
 });
 
@@ -98,9 +130,9 @@ hourglassWindow.loadURL(url.format({
     pathname: path.join(__dirname, '../hourglass/index.html'),
     protocol: 'file:',
     slashes: true
-  }))
+}));
 if(remote.getCurrentWindow().devMode){
-    hourglassWindow.webContents.openDevTools()
+    hourglassWindow.webContents.openDevTools();
 }
 hourglassWindow.webContents.on('did-finish-load', () => {
     hourglassWindow.webContents.send('message', {type: "init", content: schools});

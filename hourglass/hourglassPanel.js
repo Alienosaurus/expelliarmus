@@ -82,18 +82,31 @@ Vue.component('school-hourglass', {
     mounted () {
         fillCanvas(this.$refs.hourglassCanvas, this.school.points, this.school.color, this.school.secondColor);
     },
+    computed: {
+      // a computed getter
+        specialStyle: function () {
+            // `this` points to the vm instance
+            let style = {};
+            if(this.school.dimensions){
+                style.width = this.school.dimensions.width+"px";
+                style.height = this.school.dimensions.height+"px";
+            }
+            return style;
+        }
+    },
     template: '<div class="school">'+
-        '<div class="hourglass">'+
+        '<div class="hourglass" v-bind:style="specialStyle">'+
             '<canvas ref="hourglassCanvas"></canvas>'+
             '<img v-bind:src="school.img"/>'+
         '</div>'+
     '</div>'
-})
+});
 Vue.component('hourglass-panel', {
   props: ["schools"],
   template: '<div><div class="schoolList"><school-hourglass v-for="school in schools"' +
       'v-bind:school="school" v-bind:key="school.name" /></div></div>'
-})
+});
+
 
 ipc.on('message', (event, message) => {
     console.log(message);
@@ -112,4 +125,4 @@ ipc.on('message', (event, message) => {
         })
         application.schools = message.content;
     }
-})
+});
