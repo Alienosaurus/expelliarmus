@@ -17,7 +17,7 @@ const schools = [
     img: "../images/durmstrang.png",
     points: 0, toAdd: 0},
     {name: "Gryffondor",
-    color: "red", secondColor: "goldenrod",
+    color: "#840C0C", secondColor: "#ff3333",
     img: "../images/gryffondor.png",
     points: 0, toAdd: 0},
     {name: "Poufsouffle",
