@@ -103,8 +103,11 @@ Vue.component('school-hourglass', {
 });
 Vue.component('hourglass-panel', {
   props: ["schools"],
-  template: '<div><div class="schoolList"><school-hourglass v-for="school in schools"' +
-      'v-bind:school="school" v-bind:key="school.name" /></div></div>'
+  template: '<div>'+
+        '<img class="banner" src="../images/Bannière.png"/>'+
+        '<div class="schoolList"><school-hourglass v-for="school in schools"' +
+            'v-bind:school="school" v-bind:key="school.name" /></div>'+
+    '</div>'
 });
 
 
